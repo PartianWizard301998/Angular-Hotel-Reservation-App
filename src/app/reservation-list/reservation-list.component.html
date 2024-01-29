@@ -1,0 +1,37 @@
+<app-home></app-home>
+<div class="container mt-5">
+      <div class="row mt-5">
+        <h1 class="text-center mt-5 mb-5">Reservation Details</h1>
+         <table class="table table-striped" *ngIf="reservations.length; else noReservations">
+             <thead class="bg-dark text-white text-center">
+              <tr>
+                  <th>Guest Name</th>
+                  <th>Guest Email</th>
+                  <th>Check In Date</th>
+                  <th>Check Out Date</th>
+                  <th>Room Number</th>
+                  <th>Action</th>
+              </tr>
+             </thead>
+              <tbody class="text-center">
+                  <tr *ngFor="let reservation of reservations; index as i">
+                      <td>{{reservation.guestName}}</td>
+                      <td>{{reservation.guestEmail}}</td>
+                      <td>{{reservation.checkInDate | date : 'MMM d, y, h:mm:ss a'}}</td>
+                      <td>{{reservation.checkOutDate | date : 'MMM d, y, h:mm:ss a'}}</td>
+                      <td>{{reservation.roomNumber}}</td>
+                      <td><button class="btn btn-sm btn-outline-danger mx-1" (click)="deleteReservation(reservation.id)"> Delete </button>
+                      <button class="btn btn-sm btn-outline-secondary mx-1" [routerLink]="['/edit', reservation.id]"> Edit </button></td>
+                  </tr>
+              </tbody>
+            </table>
+
+
+            <!-- If there is no reservations available on local storage the ng-template will get executed and it will show the
+            text. This is handled by the ng-if directive. -->
+            <ng-template #noReservations>
+                You Dont have have any reservations Available.
+            </ng-template>
+     </div>
+    
+    </div>
